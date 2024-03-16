@@ -1,3 +1,5 @@
+import csv
+
 from bs4 import BeautifulSoup, SoupStrainer, PageElement
 import requests
 
@@ -41,7 +43,7 @@ soup = BeautifulSoup(r.content, "html.parser")
 
 print(soup.prettify())
 
-only_article_tags = SoupStrainer("article")
+only_article_tags: SoupStrainer = SoupStrainer("article")
 
 offers = soup.find_all(only_article_tags)
 
@@ -70,3 +72,25 @@ for offerText in offersText:
 
 for obj in offerObjects:
     print(f"{obj.__str__()}")
+
+
+filename = "oferty.csv"
+filepath = "../csv"
+
+
+def writetocsv(path):
+    fields = ["lokalizacja", "cena_za_metr", "powierzhcnia", "cena_calkowita"]
+    rows = []
+
+    for obj in offerObjects:
+        rows.append(
+            {"lokalizacja": obj.location, "cena_za_metr": obj.price_per_meter, "powierzhcnia": obj.surface,"cena_calkowita": obj.full_price}
+        )
+
+    with open(path, 'w', newline="") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+writetocsv(f"{filepath}/{filename}")
