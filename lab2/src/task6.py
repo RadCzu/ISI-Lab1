@@ -4,15 +4,15 @@ from bs4 import BeautifulSoup, SoupStrainer, PageElement
 import requests
 
 
-class PropertyListing:
+class Home:
     def __init__(self, location, full_price, price_per_meter, surface):
-        self.location = location
+        self.header_name = location
         self.full_price = full_price
         self.price_per_meter = price_per_meter
         self.surface = surface
 
     def __str__(self):
-        return f"Location: {self.location}\n" \
+        return f"Location: {self.header_name}\n" \
                f"Full Price: {self.full_price}\n" \
                f"Price per Meter: {self.price_per_meter}\n" \
                f"Surface: {self.surface}"
@@ -60,7 +60,7 @@ def parseOfferText(offerText):
     location = ''.join(offerText[(offerText.index('zł')):offerText.index('Liczba')]).replace("zł", "").replace(",", " ")
     price_per_meter = ''.join(offerText[(offerText.index('Cenazametrkwadratowy')):offerText.index('zł/m²')]).replace("Cenazametrkwadratowy", "")
     surface = ''.join(offerText[(offerText.index('Powierzchnia')):offerText.index('m²')]).replace("Powierzchnia", "")
-    return PropertyListing(location, full_price, price_per_meter, surface)
+    return Home(location, full_price, price_per_meter, surface)
 
 
 offerObjects = []
@@ -73,6 +73,7 @@ for offerText in offersText:
 for obj in offerObjects:
     print(f"{obj.__str__()}")
 
+homeDict = {}
 
 filename = "oferty.csv"
 filepath = "../csv"
@@ -84,8 +85,9 @@ def writetocsv(path):
 
     for obj in offerObjects:
         rows.append(
-            {"lokalizacja": obj.location, "cena_za_metr": obj.price_per_meter, "powierzhcnia": obj.surface,"cena_calkowita": obj.full_price}
+            {"lokalizacja": obj.header_name, "cena_za_metr": obj.price_per_meter, "powierzhcnia": obj.surface, "cena_calkowita": obj.full_price}
         )
+        homeDict[obj.header_name.split(" ")[0]] = obj
 
     with open(path, 'w', newline="") as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fields)
@@ -94,3 +96,8 @@ def writetocsv(path):
 
 
 writetocsv(f"{filepath}/{filename}")
+
+
+print(homeDict)
+
+
