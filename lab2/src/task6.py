@@ -18,7 +18,7 @@ class Home:
                f"Surface: {self.surface}"
 
 
-# z góry przepraszam jeśli
+
 URL = ("https://www.otodom.pl/pl/wyniki/sprzedaz/mieszkanie/pomorskie/gdynia/gdynia/gdynia?priceMax=600000&viewType"
        "=listing")
 headers = {
@@ -29,13 +29,12 @@ headers = {
     'cache-control': 'max-age=0',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 '
                   'Safari/537.36',
-    # Add more headers as needed
 }
 
 r = requests.get(URL, headers=headers)
 
 if r.status_code == 200:
-    print(r.text)  # Print the content of the response
+    print(r.text)
 else:
     print(f'Request failed with status code: {r.status_code}')
 

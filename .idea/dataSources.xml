@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:C:\Users\24022\PycharmProjects\ISI-Lab1\lab3\uczelnia.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="uczelnia [2]" uuid="4b5ebf2a-2901-4182-be12-a08736a8e36e">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Radek\PycharmProjects\ISI-Lab1\lab3\uczelnia.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
