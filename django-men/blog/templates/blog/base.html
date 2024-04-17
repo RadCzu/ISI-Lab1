@@ -7,10 +7,10 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Metal+Mania&effect=shadow-multiple|fire">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple|fire-animation">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=fire-animation">
     </head>
     <body>
-        <header class="page-header font-effect-shadow-multiple" >
+        <header class="page-header font-effect-fire-animation" >
           <div class="container">
                 {% if user.is_authenticated %}
                     <a href="{% url 'post_new' %}" class="top-menu">
