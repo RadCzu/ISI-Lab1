@@ -3,7 +3,7 @@
 {% block content %}
     <article class="post">
         <aside class="actions">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user == post.author %}
                  <a class="btn btn-secondary" href="{% url 'post_edit' pk=post.pk %}">
                     {% include './icons/pencil-fill.svg' %}
                  </a>
@@ -16,5 +16,20 @@
         {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.text|linebreaksbr }}</p>
+        <section class="comments">
+            <h4>Comments:
+                <!-- tworzenie posta dostępne przy zalogowaniu -->
+                {% if user.is_authenticated %}
+                    <a class="btn btn-secondary" href="{% url 'comment_new' pk=post.pk %}">
+                        {% include './icons/pencil-fill.svg' %}
+                    </a>
+                {% endif %}
+            </h4>
+            {% for comment in post.comment_set.all %}
+                {% include 'blog/post_comment.html' %}
+                {% empty %}
+            {% endfor %}
+        </section>
     </article>
+
 {% endblock %}

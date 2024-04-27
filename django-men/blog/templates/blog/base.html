@@ -12,9 +12,24 @@
     <body>
         <header class="page-header font-effect-fire-animation" >
           <div class="container">
+
                 {% if user.is_authenticated %}
                     <a href="{% url 'post_new' %}" class="top-menu">
-                        {% include './icons/pencil-fill.svg' %}
+                        New Post
+                    </a>
+                    <a href="{% url 'logout' %}" class="top-menu">
+                        Sign out
+                    </a>
+                    <a href="{% url 'profile_view' %}" class="top-menu">
+                        Profile
+                    </a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="top-menu">
+                        Sign in
+                    </a>
+                    <a href="{% url 'register' %}" class="top-menu">
+                        Sign up
                     </a>
                 {% endif %}
               <h1><a href="/">Django MANLY MEN Blog</a></h1>

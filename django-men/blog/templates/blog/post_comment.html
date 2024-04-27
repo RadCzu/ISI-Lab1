@@ -1,0 +1,13 @@
+
+{% block content %}
+    <div class="comment">
+        <p><strong>{{ comment.author }}</strong> - {{ comment.created_date }}
+            {% if user.is_authenticated and user == comment.author %}
+                <a class="btn btn-secondary" href="{% url 'comment_edit' post_pk=comment.post.pk pk=comment.pk %}">
+                    {% include './icons/pencil-fill.svg' %}
+                </a>
+            {% endif %}
+        </p>
+        <p>{{ comment.text }}</p>
+    </div>
+{% endblock %}

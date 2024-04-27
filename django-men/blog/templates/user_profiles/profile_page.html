@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3 class="text-center">User Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+                            <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'change_password' %}" class="btn btn-success">Change password</a>
+        </div>
+    </div>
+    {% endif %}
+    {% if not user.is_authenticated %}
+    <div class="card-header">
+        <h3 class="text-center">You are not logged in</h3>
+    </div>
+    {% endif %}
+{% endblock %}
