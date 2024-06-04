@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    image: app:django
+    container_name: django_container
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+    networks:
+      - djangonetwork
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: 'blog_db'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '123'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backup.sql:/backup.sql
+    networks:
+      - djangonetwork
+
+networks:
+  djangonetwork:
+    driver: bridge
+
+volumes:
+  postgres_data:

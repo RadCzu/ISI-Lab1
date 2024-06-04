@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 # to bylo zmienione
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com']
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'blog_db',
         'USER': 'postgres',
         'PASSWORD': '123',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
